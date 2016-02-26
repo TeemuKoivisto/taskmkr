@@ -41,10 +41,30 @@ TaskMkrApp.controller('TasksChildController', function($stateParams) {
         }
     ];
 })
-TaskMkrApp.controller('TasksController', function() {
+TaskMkrApp.controller('TasksController', function(TasksService) {
     var vm = this;
     
-    vm.taskit = [
+	TasksService.getTasks()
+	.then(function(tasks) {
+		vm.taskit = tasks;
+	})
+	
+	vm.parseNewTask = function(body) {
+		var line = '';
+		for(var i = 0; i < body.length; i++) {
+			if (body.charAt(i) === '\n') {
+				
+			}
+		}
+	}
+	
+	vm.createTask = function() {
+		console.log('', vm.newTask);
+	}
+})
+TaskMkrApp.service('TasksService', function() {
+	var nextId = 8;
+    var tasks = [
         {
 			id: 1,
 			title: 'yo',
@@ -123,25 +143,18 @@ TaskMkrApp.controller('TasksController', function() {
         }
     ];
 	
-	vm.parseNewTask = function(body) {
-		var line = '';
-		for(var i = 0; i < body.length; i++) {
-			if (body.charAt(i) === '\n') {
-				
-			}
-		}
+	this.getNextId = function() {
+		return nextId++;
 	}
 	
-	vm.createTask = function() {
-		console.log('', vm.newTask);
-		
+	this.getTasks = function() {
+		return Promise.resolve(tasks);
 	}
 })
-TaskMkrApp.directive('taskCreator', function() {
+TaskMkrApp.directive('taskCreator', function(TasksService) {
 	return {
 		restrict: 'E',
 		template: "<div>"+
-					"New task: [task]"+
 					"<p>Start with #id/'new' or have it generated automatically. Right after that write your title and then every property of your task separating keys with colon (:). End property with linebreak (enter).</p>"+
 					'<textarea class="task-creator-input" ng-model="body">'+
 					'</textarea>'+
@@ -284,7 +297,7 @@ TaskMkrApp.directive('taskCreator', function() {
 						iding = true;
 					} else if (iding) {
 						if (now === ' ') {
-							title = '';
+							// title = '';
 							iding = false;
 						} else {
 							id += now;
@@ -293,6 +306,9 @@ TaskMkrApp.directive('taskCreator', function() {
 						title += now;
 					}
 					now = scope.body[index++];
+				}
+				if (id === "") {
+					id = TasksService.getNextId();
 				}
 				return { id: id, title: title };
 			}

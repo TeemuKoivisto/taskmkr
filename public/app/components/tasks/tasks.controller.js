@@ -1,84 +1,10 @@
-TaskMkrApp.controller('TasksController', function() {
+TaskMkrApp.controller('TasksController', function(TasksService) {
     var vm = this;
     
-    vm.taskit = [
-        {
-			id: 1,
-			title: 'yo',
-            priority: 666,
-			description: 'yo yo',
-			tags: ['feature', 'directive'],
-			time_estimate: { min: 2, max: 4, unit: 'hour'},
-			assigned: ['teemu'],
-			dod: ['shit is done']
-        },
-        {
-            id: 2,
-			title: 'toka',
-            priority: 5,
-			description: 'toka',
-			tags: ['feature', 'directive'],
-			requires: [1],
-			time_estimate: { min: 2, max: 4, unit: 'hour'},
-			assigned: ['teemu'],
-			dod: ['shit is done']
-        },
-        {
-            id: 3,
-			title: 'kolmas',
-            priority: 5,
-			description: 'kolmas',
-			tags: ['feature', 'directive'],
-			requires: [1],
-			time_estimate: { min: 2, max: 4, unit: 'hour'},
-			assigned: ['teemu'],
-			dod: ['shit is done']
-        },
-        {
-            id: 4,
-			title: 'filleri',
-            priority: 5,
-			description: 'stuff',
-			tags: ['feature', 'directive'],
-			requires: [1],
-			time_estimate: { min: 2, max: 4, unit: 'hour'},
-			assigned: ['teemu'],
-			dod: ['shit is done']
-        },
-        {
-            id: 5,
-			title: 'filleri',
-            priority: 5,
-			description: 'stuff',
-			tags: ['feature', 'directive'],
-			requires: [1],
-			time_estimate: { min: 2, max: 4, unit: 'hour'},
-			assigned: ['teemu'],
-			dod: ['shit is done']
-        },
-        {
-            id: 6,
-			title: 'filleri',
-            priority: 5,
-			description: 'stuff',
-			tags: ['feature', 'directive'],
-			requires: [1],
-			time_estimate: { min: 2, max: 4, unit: 'hour'},
-			assigned: ['teemu'],
-			dod: ['shit is done']
-        },
-        {
-            id: 7,
-			title: 'filleri',
-            priority: 5,
-			description: 'stuff',
-			tags: ['feature', 'directive'],
-			requires: [1],
-			time_estimate: { min: 2, max: 4, unit: 'hour'},
-			assigned: ['teemu'],
-			dod: ['shit is done']
-        }
-    ];
+	TasksService.getTasks()
+	.then(function(tasks) {
+		vm.taskit = tasks;
+	})
 	
 	vm.parseNewTask = function(body) {
 		var line = '';
@@ -91,6 +17,5 @@ TaskMkrApp.controller('TasksController', function() {
 	
 	vm.createTask = function() {
 		console.log('', vm.newTask);
-		
 	}
 })

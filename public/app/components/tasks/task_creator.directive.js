@@ -1,8 +1,7 @@
-TaskMkrApp.directive('taskCreator', function() {
+TaskMkrApp.directive('taskCreator', function(TasksService) {
 	return {
 		restrict: 'E',
 		template: "<div>"+
-					"New task: [task]"+
 					"<p>Start with #id/'new' or have it generated automatically. Right after that write your title and then every property of your task separating keys with colon (:). End property with linebreak (enter).</p>"+
 					'<textarea class="task-creator-input" ng-model="body">'+
 					'</textarea>'+
@@ -145,7 +144,7 @@ TaskMkrApp.directive('taskCreator', function() {
 						iding = true;
 					} else if (iding) {
 						if (now === ' ') {
-							title = '';
+							// title = '';
 							iding = false;
 						} else {
 							id += now;
@@ -154,6 +153,9 @@ TaskMkrApp.directive('taskCreator', function() {
 						title += now;
 					}
 					now = scope.body[index++];
+				}
+				if (id === "") {
+					id = TasksService.getNextId();
 				}
 				return { id: id, title: title };
 			}
