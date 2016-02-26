@@ -1,0 +1,23 @@
+{
+  "name": "taskmkr",
+  "homepage": "https://github.com/TeemuKoivisto/taskmkr",
+  "authors": [
+    "TeemuKoivisto <tkoivisto456@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-router": "ui-router#~0.2.15"
+  }
+}

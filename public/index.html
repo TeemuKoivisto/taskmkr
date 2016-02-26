@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="TaskMkrApp" id="app>
+    <head>
+        <title>TaskMkr</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+        <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
+		<link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-default">
+                <ul class="nav navbar-nav">
+                    <li><a ng-href="#/">Tasks</a></li>
+                    <li><a ng-href="#/alltasks">Add Task as Text</a></li>
+                    <li><a ng-href="#/alltasks">All Tasks</a></li>
+                    <li><a ng-href="#/board">Board</a></li>
+                    <li><a ng-href="#/burndown">Burndown</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main ui-view id="main-container">
+        </main>
+
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+        
+		<script src="lib/logmon/logmon.js"></script>
+		
+		<script src="all.js"></script>
+    </body>
+</html>

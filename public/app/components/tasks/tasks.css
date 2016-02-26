@@ -1,0 +1,57 @@
+.tasks-container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.tasks-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.top-priority {
+    background-color: red;
+}
+
+.tasks-container .currently {
+    background-color: blue;
+}
+
+.started {
+    background-color: yellow;
+}
+
+.finished {
+    background-color: green;
+}
+
+.tasks {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: grey;
+}
+
+.task {
+    background-color: orange;
+    flex: 1 15%;
+    min-width: 200px;
+    min-height: 250px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.task-creator {
+    background-color: aqua;
+}
+
+.task-creator-input {
+    width: 100%;
+	height: 200px;
+	resize: none;
+/* 	min-width: 300px;
+	min-height: 100px; */
+}

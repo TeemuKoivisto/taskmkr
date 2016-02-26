@@ -1,0 +1,16 @@
+#new Add nav-sidebar from which you can create new tasks
+
+Probably on the right side. Might interfere with page scroll bar.
+For easy creation of new tasks. Always visible?
+OR
+You can click one of the current tasks and gives the options to create
+a new one next to it/in front of/last/first. Much smoother..
+With keyboard functionality? ctrl+enter? or just enter?
+PRIORITY: 4
+TAGS: navbar, css, directive, feature
+
+#new Add nav-bar for seeing the top priority/currently etc. tasks
+
+Pretty straightforward. Maybe only for tasks view.
+PRIORITY: 2
+TAGS: navbar, css, js, directive, feature
