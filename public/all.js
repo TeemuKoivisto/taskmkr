@@ -200,7 +200,7 @@ TaskMkrApp.directive('taskCreator', function(TasksService) {
 			];
 			
 			var findKey = function(key) {
-				Logtask.append('findKey: key ' + key);
+				//Logtask.append('findKey: key ' + key);
 				for(var i = 0; i < keyTypeMap.length; i++) {
 					if (keyTypeMap[i].keys.indexOf(key) !== -1) {
 						return keyTypeMap[i];
@@ -210,9 +210,9 @@ TaskMkrApp.directive('taskCreator', function(TasksService) {
 			}
 			
 			var parseKeyContent = function(key) {
-				Logtask.start('parseKeyContent: key ' + key);
-				Logtask.append('index ' + index);
-				Logtask.append('key ' + JSON.stringify(key));
+				//Logtask.start('parseKeyContent: key ' + key);
+				//Logtask.append('index ' + index);
+				//Logtask.append('key ' + JSON.stringify(key));
 				// var key = findKey(key);
 				var content = '';
 				if (key.type === 'string' || key.type === 'number') {
@@ -237,6 +237,8 @@ TaskMkrApp.directive('taskCreator', function(TasksService) {
 						} else if (character === '\n') {
 							content.push(current)
 							break;
+						} else if (character === " " && current === "") {
+							// pass the first whitespace
 						} else {
 							current += character;
 						}
@@ -260,13 +262,13 @@ TaskMkrApp.directive('taskCreator', function(TasksService) {
 					}
 				}
 				console.log('content ' + content)
-				Logtask.end('FROM parseKeyContent: content ' + content);
+				//Logtask.end('FROM parseKeyContent: content ' + content);
 				return content;
             }
 			
             var checkForKey = function() {
-				Logtask.start('checkForKey: ');
-				Logtask.append('index ' + index);
+				//Logtask.start('checkForKey: ');
+				//Logtask.append('index ' + index);
 				var key = '';
 				for(; index < scope.body.length; index++) {
 					var character = scope.body.charAt(index);
@@ -277,8 +279,8 @@ TaskMkrApp.directive('taskCreator', function(TasksService) {
 						break;
 					}
 				}
-				Logtask.append('index ' + index);
-				Logtask.end('FROM checkForKey: ' + key.toLowerCase());
+				//Logtask.append('index ' + index);
+				//Logtask.end('FROM checkForKey: ' + key.toLowerCase());
 				return key.toLowerCase();
             }
             
@@ -309,6 +311,8 @@ TaskMkrApp.directive('taskCreator', function(TasksService) {
 				}
 				if (id === "") {
 					id = TasksService.getNextId();
+				} else {
+					id = parseInt(id);
 				}
 				return { id: id, title: title };
 			}
@@ -316,7 +320,7 @@ TaskMkrApp.directive('taskCreator', function(TasksService) {
 			scope.updateTask = function() {}
 			
             scope.createTask = function() {
-				Logtask.start('createTask: ');
+				//Logtask.start('createTask: ');
                 if (typeof scope.body === 'undefined') {
                     return;
                 }
@@ -324,19 +328,22 @@ TaskMkrApp.directive('taskCreator', function(TasksService) {
                 newTask = {}, counter = 0;
 				newTask = readFirstLine();
 				// index = firstline.index;
+				debugger;
 				while(counter !== 250 && index !== scope.body.length) {
 					// console.log('index ' + index + ' body len ' + scope.body.length)
 					counter++;
 					var key = checkForKey();
 					key = findKey(key);
 					if (key) {
+						debugger;
 						var content = parseKeyContent(key);
-						newTask[key.keys[0]] = content;
+						var whitespaceRemoved = key.keys[0].replace(" ", "_");
+						newTask[whitespaceRemoved] = content;
 					}
 				}
                 scope.tasks.push(newTask);
 				console.log('newTask ', newTask);
-				Logtask.end('FROM createTask: newTask ' + newTask);
+				//Logtask.end('FROM createTask: newTask ' + newTask);
             }
 			
 			scope.log = function() {
