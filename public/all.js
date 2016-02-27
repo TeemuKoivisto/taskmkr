@@ -25,6 +25,34 @@ TaskMkrApp.config(function ($stateProvider, $urlRouterProvider) {
 });
 
 
+TaskMkrApp.directive("taskItem", function() {
+	return {
+		restrict: "E",
+		template:
+					'<div class="task-item">'+
+						'<p class="flex-row-sb">'+
+							'<span>#{{ task.task_id }} {{ task.title }}</span>'+
+							'<button class="btn" ng-click="toggle()">Done</button>'+
+						'</p>'+
+						'<p ng-if="task.description">DESCRIPTION: {{ task.description }}</p>'+
+						'<p ng-if="task.priority">PRIORITY: {{ task.priority }}</p>'+
+						'<p ng-if="task.tags">TAGS: {{ task.tags }}</p>'+
+						'<p ng-if="task.requires">REQUIRES: {{ task.requires }}</p>'+
+						'<p ng-if="task.time_estimate">TIME ESTIMATE: {{ task.time_estimate }}</p>'+
+						'<p ng-if="task.assigned_to">ASSIGNED TO: {{ task.assigned_to }}</p>'+
+						'<p ng-if="task.dod">DoD: {{ task.dod }}</p>'+
+					'</div>',
+		scope: {
+			task: "="
+		},
+		link: function(scope, element, attrs) {
+			
+			scope.toggle = function() {
+				console.log("hei");
+			}
+		}
+	}
+})
 TaskMkrApp.controller('TasksChildController', function($stateParams) {
     var vm = this;
     
@@ -365,8 +393,8 @@ TaskMkrApp.directive("taskCreator", function(TasksService) {
 			// }
 			
 			var readFirstLine = function() {
-				var now = scope.body[index++], id = "", iding = false, title = "";
-				while(now !== "\n") {
+				var now = scope.body[index], id = "", iding = false, title = "";
+				while(now !== "\n" && index === scope.body.length) {
 					if (now === "#" && index === 0) {
 						iding = true;
 					} else if (iding) {
@@ -379,7 +407,8 @@ TaskMkrApp.directive("taskCreator", function(TasksService) {
 					} else {
 						title += now;
 					}
-					now = scope.body[index++];
+					index++
+					now = scope.body[index];
 				}
 				if (id === "") {
 					id = TasksService.getNextId();
@@ -402,6 +431,7 @@ TaskMkrApp.directive("taskCreator", function(TasksService) {
                 }
                 index = 0;
                 newTask = {}, counter = 0;
+				// debugger;
 				newTask = readFirstLine();
 				// index = firstline.index;
 				// debugger;

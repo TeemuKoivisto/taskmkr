@@ -9,7 +9,8 @@
         <div class="finished">Finished: count</div>
     </div>
     <div class="tasks">
-        <div class="task" data-ng-repeat="task in tasks.taskit">
+		<task-item class="task" data-ng-repeat="task in tasks.taskit" task="task"></task-item>
+        <!-- <div class="task" data-ng-repeat="task in tasks.taskit">
 			<p>#{{ task.task_id }} {{ task.title }}</p>
 			<p ng-if="task.description">DESCRIPTION: {{ task.description }}</p>
 			<p ng-if="task.priority">PRIORITY: {{ task.priority }}</p>
@@ -18,7 +19,7 @@
 			<p ng-if="task.time_estimate">TIME ESTIMATE: {{ task.time_estimate }}</p>
 			<p ng-if="task.assigned_to">ASSIGNED TO: {{ task.assigned_to }}</p>
 			<p ng-if="task.dod">DoD: {{ task.dod }}</p>
-        </div>
+        </div> -->
     </div>
 	<task-creator class="task-creator" tasks="tasks.taskit"></task-creator>
     <!-- <div class="task-creator">

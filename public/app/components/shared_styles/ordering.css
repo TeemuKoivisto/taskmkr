@@ -1,0 +1,25 @@
+.flex-row {
+	display: flex;
+	flex-direction: row;
+}
+
+.flex-row-sb {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.flex-col {
+	display: flex;
+	flex-direction: column;
+}
+
+.flex-col-sb {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.mleft {
+	margin-left: 15px;
+}
