@@ -5,7 +5,10 @@ TaskMkrApp.directive("taskItem", function() {
 					'<div class="task-item">'+
 						'<p class="flex-row-sb">'+
 							'<span>#{{ task.task_id }} {{ task.title }}</span>'+
-							'<button class="btn" ng-click="toggle()">Done</button>'+
+							'<span>'+
+								'<button class="" ng-click="toggle()">Done</button>'+
+								'<button class="" ng-click="edit()">Edit</button>'+
+							'</span>'+
 						'</p>'+
 						'<p ng-if="task.description">DESCRIPTION: {{ task.description }}</p>'+
 						'<p ng-if="task.priority">PRIORITY: {{ task.priority }}</p>'+
@@ -21,7 +24,11 @@ TaskMkrApp.directive("taskItem", function() {
 		link: function(scope, element, attrs) {
 			
 			scope.toggle = function() {
-				console.log("hei");
+				console.log("done");
+			}
+			
+			scope.edit = function() {
+				console.log("edit");
 			}
 		}
 	}

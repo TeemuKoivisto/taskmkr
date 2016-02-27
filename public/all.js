@@ -22,9 +22,57 @@ TaskMkrApp.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'BoardController',
             controllerAs: 'board'
         })
+		.state("keymap", {
+			url: '/keymap',
+            templateUrl: 'app/components/keymap/keymap.html',
+            controller: 'KeymapController',
+            controllerAs: 'keymapCtrl'
+		})
+		.state("guide", {
+			url: '/guide',
+            templateUrl: 'app/components/guide/guide.html',
+            controller: 'GuideController',
+            controllerAs: 'guideCtrl'
+		})
 });
 
 
+TaskMkrApp.controller("KeymapController", function(KeymapService) {
+	var vm = this;
+	
+	KeymapService.getKeymaps()
+	.then(function(keymaps) {
+		vm.keymaps = keymaps;
+	})
+})
+TaskMkrApp.service("KeymapService", function($http) {
+	this.keymaps = [
+		{
+			name: "task_id",
+			type: "Number"
+		},
+		{
+			name: "title",
+			type: "String"
+		},
+		{
+			name: "description",
+			type: "String"
+		},
+		{
+			name: "priority",
+			type: "Number"
+		},
+		{
+			name: "tags",
+			type: "Array<String>"
+		},
+	];
+	
+	this.getKeymaps = function() {
+		return Promise.resolve(this.keymaps);
+	}
+})
 TaskMkrApp.directive("taskItem", function() {
 	return {
 		restrict: "E",
@@ -32,7 +80,10 @@ TaskMkrApp.directive("taskItem", function() {
 					'<div class="task-item">'+
 						'<p class="flex-row-sb">'+
 							'<span>#{{ task.task_id }} {{ task.title }}</span>'+
-							'<button class="btn" ng-click="toggle()">Done</button>'+
+							'<span>'+
+								'<button class="" ng-click="toggle()">Done</button>'+
+								'<button class="" ng-click="edit()">Edit</button>'+
+							'</span>'+
 						'</p>'+
 						'<p ng-if="task.description">DESCRIPTION: {{ task.description }}</p>'+
 						'<p ng-if="task.priority">PRIORITY: {{ task.priority }}</p>'+
@@ -48,8 +99,36 @@ TaskMkrApp.directive("taskItem", function() {
 		link: function(scope, element, attrs) {
 			
 			scope.toggle = function() {
+				console.log("done");
+			}
+			
+			scope.edit = function() {
+				console.log("edit");
+			}
+		}
+	}
+})
+TaskMkrApp.directive("taskNav", function() {
+	return {
+		restrict: "E",
+		template:
+					'<div class="task-nav flex-row">'+
+						'<button>SHOW UNDONE</button>'+
+						'<button>SHOW DONE</button>'+
+						'<button>SHOW TOP10</button>'+
+						'<button>SHOW LATEST10</button>'+
+					'</div>',
+		scope: {
+			task: "="
+		},
+		link: function(scope, element, attrs) {
+			
+			scope.toggle = function() {
 				console.log("hei");
 			}
+			
+			// TODO
+			// add filter_by <dropdown> <input>
 		}
 	}
 })
@@ -75,6 +154,7 @@ TaskMkrApp.controller('TasksController', function(TasksService) {
 	TasksService.getTasks()
 	.then(function(tasks) {
 		vm.taskit = tasks;
+		vm.top_priority = TasksService.getTopPriority();
 	})
 	
 	vm.parseNewTask = function(body) {
@@ -169,6 +249,17 @@ TaskMkrApp.service('TasksService', function($http) {
 			// dod: ['shit is done']
         // }
     ];
+	
+	this.getTopPriority = function() {
+		var top = this.tasks[0];
+		for(var t = 0; t < this.tasks.length; t++) {
+			if (this.tasks[t].priority > top.priority) {
+				top = this.tasks[t];
+			}
+		}
+		// console.log
+		return top;
+	}
 	
 	this.getNextId = function() {
 		function compare(a, b) {

@@ -78,6 +78,17 @@ TaskMkrApp.service('TasksService', function($http) {
         // }
     ];
 	
+	this.getTopPriority = function() {
+		var top = this.tasks[0];
+		for(var t = 0; t < this.tasks.length; t++) {
+			if (this.tasks[t].priority > top.priority) {
+				top = this.tasks[t];
+			}
+		}
+		// console.log
+		return top;
+	}
+	
 	this.getNextId = function() {
 		function compare(a, b) {
 			if (a.task_id > b.task_id) {

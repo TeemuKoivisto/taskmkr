@@ -22,4 +22,16 @@ TaskMkrApp.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'BoardController',
             controllerAs: 'board'
         })
+		.state("keymap", {
+			url: '/keymap',
+            templateUrl: 'app/components/keymap/keymap.html',
+            controller: 'KeymapController',
+            controllerAs: 'keymapCtrl'
+		})
+		.state("guide", {
+			url: '/guide',
+            templateUrl: 'app/components/guide/guide.html',
+            controller: 'GuideController',
+            controllerAs: 'guideCtrl'
+		})
 });

@@ -2,33 +2,15 @@
     <div ui-view>
     </div>
     <p>Shows 10 tasks with highest priority (if same priority shows the older)</p>
+	<task-nav></task-nav>
     <div class="tasks-bar">
-        <div class="top-priority">Top priority: id</div>
-        <div class="currently">Currently: count</div>
+        <div class="top-priority">Top priority: #{{ tasks.top_priority.task_id }} ({{ tasks.top_priority.priority }})</div>
+        <div class="currently">Currently: {{ tasks.taskit.length }}</div>
         <div class="started">Started: [id]</div>
         <div class="finished">Finished: count</div>
     </div>
     <div class="tasks">
 		<task-item class="task" data-ng-repeat="task in tasks.taskit" task="task"></task-item>
-        <!-- <div class="task" data-ng-repeat="task in tasks.taskit">
-			<p>#{{ task.task_id }} {{ task.title }}</p>
-			<p ng-if="task.description">DESCRIPTION: {{ task.description }}</p>
-			<p ng-if="task.priority">PRIORITY: {{ task.priority }}</p>
-			<p ng-if="task.tags">TAGS: {{ task.tags }}</p>
-			<p ng-if="task.requires">REQUIRES: {{ task.requires }}</p>
-			<p ng-if="task.time_estimate">TIME ESTIMATE: {{ task.time_estimate }}</p>
-			<p ng-if="task.assigned_to">ASSIGNED TO: {{ task.assigned_to }}</p>
-			<p ng-if="task.dod">DoD: {{ task.dod }}</p>
-        </div> -->
     </div>
 	<task-creator class="task-creator" tasks="tasks.taskit"></task-creator>
-    <!-- <div class="task-creator">
-		New task: [task]
-		<textarea class="task-creator-input" ng-model="tasks.newTask.body">
-		</textarea>
-		<button ng-click="tasks.createTask()">Create</button>
-	</div> -->
-    <!-- <ul>
-        <li data-ng-repeat="task in tasks.taskit">{{ task.name }} ja {{ task.priority }}</li>
-    </ul> -->
 </div>

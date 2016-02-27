@@ -24,4 +24,5 @@ process.on('SIGINT', function() {
   }); 
 }); 
 
-module.exports.connect = mongoose.connect(config.mongodb.dev);
+// module.exports.connect = mongoose.connect(config.mongodb.dev);
+module.exports.connect = mongoose.connect(config.mongodb.prod);
