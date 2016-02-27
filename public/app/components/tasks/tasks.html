@@ -10,7 +10,7 @@
     </div>
     <div class="tasks">
         <div class="task" data-ng-repeat="task in tasks.taskit">
-			<p>#{{ task.id }} {{ task.title }}</p>
+			<p>#{{ task.task_id }} {{ task.title }}</p>
 			<p ng-if="task.description">DESCRIPTION: {{ task.description }}</p>
 			<p ng-if="task.priority">PRIORITY: {{ task.priority }}</p>
 			<p ng-if="task.tags">TAGS: {{ task.tags }}</p>

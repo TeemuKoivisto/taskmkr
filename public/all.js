@@ -66,7 +66,7 @@ TaskMkrApp.service('TasksService', function() {
 	var nextId = 8;
     var tasks = [
         {
-			id: 1,
+			task_id: 1,
 			title: 'yo',
             priority: 666,
 			description: 'yo yo',
@@ -76,7 +76,7 @@ TaskMkrApp.service('TasksService', function() {
 			dod: ['shit is done']
         },
         {
-            id: 2,
+            task_id: 2,
 			title: 'toka',
             priority: 5,
 			description: 'toka',
@@ -87,7 +87,7 @@ TaskMkrApp.service('TasksService', function() {
 			dod: ['shit is done']
         },
         {
-            id: 3,
+            task_id: 3,
 			title: 'kolmas',
             priority: 5,
 			description: 'kolmas',
@@ -98,7 +98,7 @@ TaskMkrApp.service('TasksService', function() {
 			dod: ['shit is done']
         },
         {
-            id: 4,
+            task_id: 4,
 			title: 'filleri',
             priority: 5,
 			description: 'stuff',
@@ -109,7 +109,7 @@ TaskMkrApp.service('TasksService', function() {
 			dod: ['shit is done']
         },
         {
-            id: 5,
+            task_id: 5,
 			title: 'filleri',
             priority: 5,
 			description: 'stuff',
@@ -120,7 +120,7 @@ TaskMkrApp.service('TasksService', function() {
 			dod: ['shit is done']
         },
         {
-            id: 6,
+            task_id: 6,
 			title: 'filleri',
             priority: 5,
 			description: 'stuff',
@@ -131,7 +131,7 @@ TaskMkrApp.service('TasksService', function() {
 			dod: ['shit is done']
         },
         {
-            id: 7,
+            task_id: 7,
 			title: 'filleri',
             priority: 5,
 			description: 'stuff',
@@ -151,90 +151,91 @@ TaskMkrApp.service('TasksService', function() {
 		return Promise.resolve(tasks);
 	}
 })
-TaskMkrApp.directive('taskCreator', function(TasksService) {
+TaskMkrApp.directive("taskCreator", function(TasksService) {
 	return {
-		restrict: 'E',
+		restrict: "E",
 		template: "<div>"+
 					"<p>Start with #id/'new' or have it generated automatically. Right after that write your title and then every property of your task separating keys with colon (:). End property with linebreak (enter).</p>"+
-					'<textarea class="task-creator-input" ng-model="body">'+
-					'</textarea>'+
-					'<button ng-click="createTask()">Create</button>'+
-					'<button ng-click="updateTask()">Update</button>'+
-					'<button ng-click="log()">Log</button>'+
+					"<textarea class='task-creator-input' ng-model='body'>"+
+					"</textarea>"+
+					"<button ng-click='createTask()'>Create</button>"+
+					"<button ng-click='updateTask()'>Update</button>"+
+					"<button ng-click='log()'>Log</button>"+
 				  "</div>",
 		scope: {
-			tasks: '='
+			tasks: "="
 		},
 		link: function(scope, element, attrs) {
 			var newTask = {}, index = 0;
             
 			var keyTypeMap = [
 				{
-					keys: ['tags'],
-					type: 'array'
+					keys: ["tags"],
+					type: "array"
 				},
 				{
-					keys: ['assigned to'],
-					type: 'array'
+					keys: ["assigned to"],
+					type: "array"
 				},
 				{
-					keys: ['requires'],
-					type: 'array'
+					keys: ["requires"],
+					type: "array"
 				},
 				{
-					keys: ['dod'],
-					type: 'array'
+					keys: ["dod"],
+					type: "array"
 				},
 				{
-					keys: ['description'],
-					type: 'string'
+					keys: ["description"],
+					type: "string"
 				},
 				{
-					keys: ['priority'],
-					type: 'number'
+					keys: ["priority"],
+					type: "number"
 				},
 				{
-					keys: ['time estimate'],
-					type: 'number-number'
+					keys: ["time estimate"],
+					type: "number-number"
 				},
 			];
 			
 			var findKey = function(key) {
-				//Logtask.append('findKey: key ' + key);
+				//Logtask.append("findKey: key " + key);
 				for(var i = 0; i < keyTypeMap.length; i++) {
 					if (keyTypeMap[i].keys.indexOf(key) !== -1) {
 						return keyTypeMap[i];
 					}
 				}
-				return '';
+				return "";
 			}
 			
 			var parseKeyContent = function(key) {
-				//Logtask.start('parseKeyContent: key ' + key);
-				//Logtask.append('index ' + index);
-				//Logtask.append('key ' + JSON.stringify(key));
+				//Logtask.start("parseKeyContent: key " + key);
+				//Logtask.append("index " + index);
+				//Logtask.append("key " + JSON.stringify(key));
 				// var key = findKey(key);
-				var content = '';
-				if (key.type === 'string' || key.type === 'number') {
+				var content = "";
+				if (key.type === "string" || key.type === "number") {
 					while(index !== scope.body.length) {
 						var character = scope.body.charAt(index++);
-						if (character === '\n') {
-							content = key.type === 'number' ? parseFloat(content) : content;
+						if (character === "\n") {
+							content = key.type === "number" ? parseFloat(content) : content;
 							break;
 						} else {
 							content += character;
 						}
 					}
-				} else if (key.type === 'array') {
-					var current = '', content = [];
+				} else if (key.type === "array") {
+					var current = "", content = [];
 					while(index !== scope.body.length) {
+					// while(true) {
 						var character = scope.body.charAt(index++);
 						// skip whitespaces?
-						if (character === ',' || index === scope.body.length) {
-							current += character === ',' ? '' : character;
+						if (character === "," || index === scope.body.length) {
+							current += character === "," ? "" : character;
 							content.push(current)
-							current = '';
-						} else if (character === '\n') {
+							current = "";
+						} else if (character === "\n") {
 							content.push(current)
 							break;
 						} else if (character === " " && current === "") {
@@ -243,63 +244,84 @@ TaskMkrApp.directive('taskCreator', function(TasksService) {
 							current += character;
 						}
 					}
-				} else if (key.type === 'number-number') {
-					var current = '', content = [];
-					for(; index < scope.body.length; index++) {
-						var character = scope.body.charAt(index);
-						if (character === '\n') {
-							index++;
+				} else if (key.type === "number-number") {
+					var current = "", unit = "", content = [];
+					while(index !== scope.body.length) {
+					// while(true) {
+						var character = scope.body.charAt(index++);
+						if (character === "\n" || index === scope.body.length) {
+							if ((character >= '0' && character <= '9') || character === '.') {
+								current += character;
+							} else {
+								unit += character;
+							}
 							current = parseFloat(current)
 							content.push(current)
+							content.push(unit)
 							break;
-						} else if (character === '-') {
-							current = parseFloat(current)
+						} else if (character === "-") {
+							current = parseFloat(current);
 							content.push(current)
-							current = '';
+							current = "";
+						} else if ((character >= '0' && character <= '9') || character === '.') {
+							current += character;
+						} else if (character === " " && current === "") {
+							// pass the first whitespace
 						} else {
-							content += character;
+							unit += character;
 						}
 					}
+					var contentObj = {};
+					if (content.length>0) {
+						contentObj.min = content[0];
+					}
+					if (content.length>1) {
+						contentObj.max = content[1];
+					}
+					if (content.length>2) {
+						contentObj.unit = content[2];
+					}
+					content = contentObj;
 				}
-				console.log('content ' + content)
-				//Logtask.end('FROM parseKeyContent: content ' + content);
+				console.log("content " + content)
+				//Logtask.end("FROM parseKeyContent: content " + content);
 				return content;
             }
 			
             var checkForKey = function() {
-				//Logtask.start('checkForKey: ');
-				//Logtask.append('index ' + index);
-				var key = '';
+				//Logtask.start("checkForKey: ");
+				//Logtask.append("index " + index);
+				var key = "";
 				for(; index < scope.body.length; index++) {
 					var character = scope.body.charAt(index);
-					if (character !== ':') {
+					if (character !== ":") {
 						key += character;
 					} else {
 						index++;
 						break;
 					}
 				}
-				//Logtask.append('index ' + index);
-				//Logtask.end('FROM checkForKey: ' + key.toLowerCase());
+				//Logtask.append("index " + index);
+				//Logtask.end("FROM checkForKey: " + key.toLowerCase());
 				return key.toLowerCase();
             }
             
 			// var readLine = function(index) {
-				// var line = '';
-				// while(scope.body[index] !== '\n') {
+				// var line = "";
+				// while(scope.body[index] !== "\n") {
 					// line += scope.body[index++];
 				// }
 				// return line;
 			// }
 			
 			var readFirstLine = function() {
-				var now = scope.body[index++], id = '', iding = false, title = '';
-				while(now !== '\n') {
-					if (now === '#' && index === 0) {
+				var now = scope.body[index++], id = "", iding = false, title = "";
+				while(now !== "\n") {
+					if (now === "#" && index === 0) {
 						iding = true;
 					} else if (iding) {
-						if (now === ' ') {
-							// title = '';
+						if (now === " ") {
+							// title = "";
 							iding = false;
 						} else {
 							id += now;
@@ -314,14 +336,14 @@ TaskMkrApp.directive('taskCreator', function(TasksService) {
 				} else {
 					id = parseInt(id);
 				}
-				return { id: id, title: title };
+				return { task_id: id, title: title };
 			}
 			
 			scope.updateTask = function() {}
 			
             scope.createTask = function() {
-				//Logtask.start('createTask: ');
-                if (typeof scope.body === 'undefined') {
+				//Logtask.start("createTask: ");
+                if (typeof scope.body === "undefined") {
                     return;
                 }
                 index = 0;
@@ -330,7 +352,7 @@ TaskMkrApp.directive('taskCreator', function(TasksService) {
 				// index = firstline.index;
 				debugger;
 				while(counter !== 250 && index !== scope.body.length) {
-					// console.log('index ' + index + ' body len ' + scope.body.length)
+					// console.log("index " + index + " body len " + scope.body.length)
 					counter++;
 					var key = checkForKey();
 					key = findKey(key);
@@ -342,12 +364,12 @@ TaskMkrApp.directive('taskCreator', function(TasksService) {
 					}
 				}
                 scope.tasks.push(newTask);
-				console.log('newTask ', newTask);
-				//Logtask.end('FROM createTask: newTask ' + newTask);
+				console.log("newTask ", newTask);
+				//Logtask.end("FROM createTask: newTask " + newTask);
             }
 			
 			scope.log = function() {
-				console.log('', scope.tasks)
+				console.log("", scope.tasks)
 			}
 		}
 	}

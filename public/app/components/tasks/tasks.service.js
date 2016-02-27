@@ -2,7 +2,7 @@ TaskMkrApp.service('TasksService', function() {
 	var nextId = 8;
     var tasks = [
         {
-			id: 1,
+			task_id: 1,
 			title: 'yo',
             priority: 666,
 			description: 'yo yo',
@@ -12,7 +12,7 @@ TaskMkrApp.service('TasksService', function() {
 			dod: ['shit is done']
         },
         {
-            id: 2,
+            task_id: 2,
 			title: 'toka',
             priority: 5,
 			description: 'toka',
@@ -23,7 +23,7 @@ TaskMkrApp.service('TasksService', function() {
 			dod: ['shit is done']
         },
         {
-            id: 3,
+            task_id: 3,
 			title: 'kolmas',
             priority: 5,
 			description: 'kolmas',
@@ -34,7 +34,7 @@ TaskMkrApp.service('TasksService', function() {
 			dod: ['shit is done']
         },
         {
-            id: 4,
+            task_id: 4,
 			title: 'filleri',
             priority: 5,
 			description: 'stuff',
@@ -45,7 +45,7 @@ TaskMkrApp.service('TasksService', function() {
 			dod: ['shit is done']
         },
         {
-            id: 5,
+            task_id: 5,
 			title: 'filleri',
             priority: 5,
 			description: 'stuff',
@@ -56,7 +56,7 @@ TaskMkrApp.service('TasksService', function() {
 			dod: ['shit is done']
         },
         {
-            id: 6,
+            task_id: 6,
 			title: 'filleri',
             priority: 5,
 			description: 'stuff',
@@ -67,7 +67,7 @@ TaskMkrApp.service('TasksService', function() {
 			dod: ['shit is done']
         },
         {
-            id: 7,
+            task_id: 7,
 			title: 'filleri',
             priority: 5,
 			description: 'stuff',

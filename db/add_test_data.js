@@ -4,11 +4,9 @@ var models = require('../models/models');
 var Task = models.Task;
 
 var task1 = new Task({
-	content: {
-		id: 1,
-		title: "testi1",
-		tags: ["no", "drugs"]
-	}
+	task_id: 1,
+	title: "testi1",
+	tags: ["no", "drugs"]
 });
 
 Q.all([
