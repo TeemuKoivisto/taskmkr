@@ -2,7 +2,7 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 
-require("./db/add_test_data");
+// require("./db/add_test_data");
 
 var db = require("./db/mongodb_connection");
 db.connect;

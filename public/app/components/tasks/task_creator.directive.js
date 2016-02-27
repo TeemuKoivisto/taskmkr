@@ -180,6 +180,10 @@ TaskMkrApp.directive("taskCreator", function(TasksService) {
 				}
 				if (id === "") {
 					id = TasksService.getNextId();
+					// TasksService.getNextId()
+					// .then(function(id) {
+						// id = id;
+					// })
 				} else {
 					id = parseInt(id);
 				}
@@ -197,14 +201,14 @@ TaskMkrApp.directive("taskCreator", function(TasksService) {
                 newTask = {}, counter = 0;
 				newTask = readFirstLine();
 				// index = firstline.index;
-				debugger;
+				// debugger;
 				while(counter !== 250 && index !== scope.body.length) {
 					// console.log("index " + index + " body len " + scope.body.length)
 					counter++;
 					var key = checkForKey();
 					key = findKey(key);
 					if (key) {
-						debugger;
+						// debugger;
 						var content = parseKeyContent(key);
 						var whitespaceRemoved = key.keys[0].replace(" ", "_");
 						newTask[whitespaceRemoved] = content;
@@ -212,6 +216,7 @@ TaskMkrApp.directive("taskCreator", function(TasksService) {
 				}
                 scope.tasks.push(newTask);
 				console.log("newTask ", newTask);
+				TasksService.saveTask(newTask);
 				//Logtask.end("FROM createTask: newTask " + newTask);
             }
 			
