@@ -14,3 +14,34 @@ TAGS: navbar, css, directive, feature
 Pretty straightforward. Maybe only for tasks view.
 PRIORITY: 2
 TAGS: navbar, css, js, directive, feature
+
+////////////
+
+Add nav-sidebar from which you can create new tasks
+description: Probably on the right side. Might interfere with page scroll bar. Always visible? OR You can click one of the current tasks and it gives the option to create a new one next to it/in front of /last/first. Much smoother.. With keyboard functionality? enter?
+priority: 4
+tags: navbar, css, directive, feature
+
+Add filter_by <dropdown> <input> to tasks-nav
+priority: 3
+tags: tasks, navbar, css, directive, feature
+
+Add updating of top_priority in tasks
+priority: 3
+tags: tasks, enhancement
+
+Add "update" mini-view inside tasks to keep task updated
+description: So you can update the current progress or writer your after thougths when you're finished.
+priority: 2
+tags: tasks, feature
+
+Enhance the current parsing of tasks by linebreak
+description: Because you might want to use them to structure your massive strings into readable blocks. Maybe use either double linebreak or pre-emptive checking (isNextWordIsKey).
+priority: 5
+tags: tasks, enhancement, js
+
+Create view for adding multiple tasks at once
+description: Cus I don't want to hassle with databases all the time. And keeping the fileformat somewhat convenient you could write to .txt-files and then push to interwebz if you feel like it (bad connection or smthing).
+priority: 5
+tags: tasks, enhancement, new route
+

@@ -1,11 +1,8 @@
-TaskMkrApp.controller('TasksController', function(TasksService) {
+TaskMkrApp.controller('TasksController', function(TasksService, tasks) {
     var vm = this;
     
-	TasksService.getTasks()
-	.then(function(tasks) {
-		vm.taskit = tasks;
-		vm.top_priority = TasksService.getTopPriority();
-	})
+	vm.taskit = tasks;
+	vm.top_priority = TasksService.getTopPriority();
 	
 	vm.parseNewTask = function(body) {
 		var line = '';

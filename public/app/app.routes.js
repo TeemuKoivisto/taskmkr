@@ -6,6 +6,11 @@ TaskMkrApp.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('tasks', {
             url: '/tasks',
+			resolve: {
+				tasks: function(TasksService) {
+					return TasksService.getTasks();
+				}
+			},
             templateUrl: 'app/components/tasks/tasks.html',
             controller: 'TasksController',
             controllerAs: 'tasks'

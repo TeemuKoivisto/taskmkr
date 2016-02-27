@@ -6,6 +6,11 @@ TaskMkrApp.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('tasks', {
             url: '/tasks',
+			resolve: {
+				tasks: function(TasksService) {
+					return TasksService.getTasks();
+				}
+			},
             templateUrl: 'app/components/tasks/tasks.html',
             controller: 'TasksController',
             controllerAs: 'tasks'
@@ -37,6 +42,9 @@ TaskMkrApp.config(function ($stateProvider, $urlRouterProvider) {
 });
 
 
+TaskMkrApp.controller("GuideController", function() {
+	var vm = this;
+})
 TaskMkrApp.controller("KeymapController", function(KeymapService) {
 	var vm = this;
 	
@@ -148,14 +156,11 @@ TaskMkrApp.controller('TasksChildController', function($stateParams) {
         }
     ];
 })
-TaskMkrApp.controller('TasksController', function(TasksService) {
+TaskMkrApp.controller('TasksController', function(TasksService, tasks) {
     var vm = this;
     
-	TasksService.getTasks()
-	.then(function(tasks) {
-		vm.taskit = tasks;
-		vm.top_priority = TasksService.getTopPriority();
-	})
+	vm.taskit = tasks;
+	vm.top_priority = TasksService.getTopPriority();
 	
 	vm.parseNewTask = function(body) {
 		var line = '';
@@ -251,6 +256,9 @@ TaskMkrApp.service('TasksService', function($http) {
     ];
 	
 	this.getTopPriority = function() {
+		// if (this.tasks.length === 0) {
+			// return 1;
+		// }
 		var top = this.tasks[0];
 		for(var t = 0; t < this.tasks.length; t++) {
 			if (this.tasks[t].priority > top.priority) {
@@ -272,7 +280,11 @@ TaskMkrApp.service('TasksService', function($http) {
 			}
 		}
 		this.tasks.sort(compare);
-		return this.tasks[this.tasks.length-1].task_id+1;
+		if (this.tasks.length === 0) {
+			return 1;
+		} else {
+			return this.tasks[this.tasks.length-1].task_id+1;
+		}
 	}
 	
 	// this.getNextId = function() {
@@ -485,7 +497,7 @@ TaskMkrApp.directive("taskCreator", function(TasksService) {
 			
 			var readFirstLine = function() {
 				var now = scope.body[index], id = "", iding = false, title = "";
-				while(now !== "\n" && index === scope.body.length) {
+				while(now !== "\n" && index !== scope.body.length) {
 					if (now === "#" && index === 0) {
 						iding = true;
 					} else if (iding) {
@@ -501,6 +513,7 @@ TaskMkrApp.directive("taskCreator", function(TasksService) {
 					index++
 					now = scope.body[index];
 				}
+				index++;
 				if (id === "") {
 					id = TasksService.getNextId();
 					// TasksService.getNextId()
@@ -522,7 +535,7 @@ TaskMkrApp.directive("taskCreator", function(TasksService) {
                 }
                 index = 0;
                 newTask = {}, counter = 0;
-				// debugger;
+				debugger;
 				newTask = readFirstLine();
 				// index = firstline.index;
 				// debugger;

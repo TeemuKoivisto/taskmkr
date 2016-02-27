@@ -1,5 +1,8 @@
-.keymap-container {
+.guide-container {
 	
+}
+.keymap-container {
+	margin-left: 15px;
 }
 .flex-row {
 	display: flex;

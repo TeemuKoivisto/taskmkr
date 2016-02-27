@@ -163,7 +163,7 @@ TaskMkrApp.directive("taskCreator", function(TasksService) {
 			
 			var readFirstLine = function() {
 				var now = scope.body[index], id = "", iding = false, title = "";
-				while(now !== "\n" && index === scope.body.length) {
+				while(now !== "\n" && index !== scope.body.length) {
 					if (now === "#" && index === 0) {
 						iding = true;
 					} else if (iding) {
@@ -179,6 +179,7 @@ TaskMkrApp.directive("taskCreator", function(TasksService) {
 					index++
 					now = scope.body[index];
 				}
+				index++;
 				if (id === "") {
 					id = TasksService.getNextId();
 					// TasksService.getNextId()
@@ -200,7 +201,7 @@ TaskMkrApp.directive("taskCreator", function(TasksService) {
                 }
                 index = 0;
                 newTask = {}, counter = 0;
-				// debugger;
+				debugger;
 				newTask = readFirstLine();
 				// index = firstline.index;
 				// debugger;

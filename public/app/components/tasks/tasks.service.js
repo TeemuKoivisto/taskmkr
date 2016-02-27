@@ -79,6 +79,9 @@ TaskMkrApp.service('TasksService', function($http) {
     ];
 	
 	this.getTopPriority = function() {
+		// if (this.tasks.length === 0) {
+			// return 1;
+		// }
 		var top = this.tasks[0];
 		for(var t = 0; t < this.tasks.length; t++) {
 			if (this.tasks[t].priority > top.priority) {
@@ -100,7 +103,11 @@ TaskMkrApp.service('TasksService', function($http) {
 			}
 		}
 		this.tasks.sort(compare);
-		return this.tasks[this.tasks.length-1].task_id+1;
+		if (this.tasks.length === 0) {
+			return 1;
+		} else {
+			return this.tasks[this.tasks.length-1].task_id+1;
+		}
 	}
 	
 	// this.getNextId = function() {
