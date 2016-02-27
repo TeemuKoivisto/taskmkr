@@ -8,7 +8,7 @@ var TaskLibrary = new Schema({
 
 var TaskSchema = new Schema({
 	date: { type: Date, default: Date.now },
-	content: { Schema.Types.Mixed }
+	content: { type: Schema.Types.Mixed }
 })
 
-module.exports.Task = mongoose.model("Task", CommentSchema);
+module.exports.Task = mongoose.model("Task", TaskSchema);

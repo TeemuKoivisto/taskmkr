@@ -1,6 +1,11 @@
 var express = require('express');
 var app = express();
 
+require("./db/add_test_data");
+
+var db = require("./db/mongodb_connection");
+db.connect;
+
 var logger = require('morgan');
 app.use(logger('dev'));
 
