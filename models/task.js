@@ -1,8 +1,8 @@
 var mongoose = require("mongoose");
 var Q = require("q");
 
-var models = require("../models/models");
-var Task = models.Task;
+var schemas = require("../models/schemas");
+var Task = schemas.Task;
 
 module.exports.findLastId = function(req, res) {
 	Task

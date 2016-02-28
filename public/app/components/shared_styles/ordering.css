@@ -23,3 +23,7 @@
 .mleft {
 	margin-left: 15px;
 }
+
+.clickable {
+	cursor: pointer;
+}

@@ -29,6 +29,10 @@
 .mleft {
 	margin-left: 15px;
 }
+
+.clickable {
+	cursor: pointer;
+}
 .tasks-container {
     display: flex;
     flex-direction: column;
@@ -76,6 +80,10 @@
 }
 
 /* taskItem */
+.priority-input {
+	width: 50px;
+}
+
 .task-item-tag {
 	display: inline-block;
 	padding: 6px 12px;
