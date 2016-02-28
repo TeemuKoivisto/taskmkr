@@ -12,7 +12,13 @@ TaskMkrApp.directive("taskItem", function() {
 						'</p>'+
 						'<p ng-if="task.description">DESCRIPTION: {{ task.description }}</p>'+
 						'<p ng-if="task.priority">PRIORITY: {{ task.priority }}</p>'+
-						'<p ng-if="task.tags">TAGS: {{ task.tags }}</p>'+
+						// '<p ng-if="task.tags">{{ task.tags }}</p>'+
+						'<p ng-if="task.tags">TAGS: '+
+							'<span class="task-item-tag" data-ng-repeat="tag in task.tags">'+
+								'{{ tag }}'+
+							'</span>'+
+							'<button class="task-item-tag">Add new</button>'+
+						'</p>'+
 						'<p ng-if="task.requires">REQUIRES: {{ task.requires }}</p>'+
 						'<p ng-if="task.time_estimate">TIME ESTIMATE: {{ task.time_estimate }}</p>'+
 						'<p ng-if="task.assigned_to">ASSIGNED TO: {{ task.assigned_to }}</p>'+

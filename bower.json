@@ -5,7 +5,7 @@
     "TeemuKoivisto <tkoivisto456@gmail.com>"
   ],
   "description": "",
-  "main": "",
+  "main": "index.js",
   "moduleType": [
     "node"
   ],
@@ -15,9 +15,14 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "public/bower_components"
   ],
   "dependencies": {
-    "angular-ui-router": "ui-router#~0.2.15"
+    "bootstrap": "~3.3.6",
+    "Ionicons": "ionicons#^2.0.1",
+    "angular": "^1.5.0",
+    "angular-ui-router": "ui-router#^0.2.18",
+    "jquery": "^2.2.1"
   }
 }
