@@ -1,6 +1,6 @@
 var gulp = require('gulp'),
-	concat = require('gulp-concat');
-	
+  concat = require('gulp-concat');
+  
 gulp.task('concat-js', function() {
     gulp.src('public/app/**/*.js')
     .pipe(concat('all.js'))
@@ -14,6 +14,6 @@ gulp.task('concat-css', function() {
 });
 
 gulp.task('watch-app', ['concat-js', 'concat-css'], function() {
-	gulp.watch('public/app/**/*.js', ['concat-js'])
-	gulp.watch('public/app/**/*.css', ['concat-css'])
+  gulp.watch('public/app/**/*.js', ['concat-js'])
+  gulp.watch('public/app/**/*.css', ['concat-css'])
 });

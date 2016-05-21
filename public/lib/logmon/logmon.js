@@ -42,7 +42,7 @@ var logmon = (function() {
         
         this.log = [];
         this.logIndent = '';
-		this.indent = '\t'
+    this.indent = '\t'
 
         this.timer = {};
         

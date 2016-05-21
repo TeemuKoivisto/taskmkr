@@ -1,37 +1,37 @@
 .guide-container {
-	
+  
 }
 .keymap-container {
-	margin-left: 15px;
+  margin-left: 15px;
 }
 .flex-row {
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .flex-row-sb {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .flex-col {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .flex-col-sb {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .mleft {
-	margin-left: 15px;
+  margin-left: 15px;
 }
 
 .clickable {
-	cursor: pointer;
+  cursor: pointer;
 }
 .tasks-container {
     display: flex;
@@ -81,16 +81,16 @@
 
 /* taskItem */
 .priority-input {
-	width: 50px;
+  width: 50px;
 }
 
 .task-item-tag {
-	display: inline-block;
-	padding: 6px 12px;
-	margin: 1px;
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 1px;
     margin-bottom: 0;
-	border: 1px solid black;
-	border-radius: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
     /* cursor: pointer; */
 }
 
@@ -100,8 +100,8 @@
 
 .task-creator-input {
     width: 100%;
-	height: 200px;
-	resize: none;
-/* 	min-width: 300px;
-	min-height: 100px; */
+  height: 200px;
+  resize: none;
+/*   min-width: 300px;
+  min-height: 100px; */
 }

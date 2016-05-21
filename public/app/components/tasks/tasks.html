@@ -2,7 +2,7 @@
     <div ui-view>
     </div>
     <p>Shows 10 tasks with highest priority (if same priority shows the older)</p>
-	<task-nav></task-nav>
+  <task-nav></task-nav>
     <div class="tasks-bar">
         <div class="top-priority">Top priority: #{{ tasks.top_priority.task_id }} ({{ tasks.top_priority.priority }})</div>
         <div class="currently">Currently: {{ tasks.taskit.length }}</div>
@@ -10,7 +10,7 @@
         <div class="finished">Finished: count</div>
     </div>
     <div class="tasks">
-		<task-item class="task" data-ng-repeat="task in tasks.taskit" task="task"></task-item>
+    <task-item class="task" data-ng-repeat="task in tasks.taskit" task="task"></task-item>
     </div>
-	<task-creator class="task-creator" tasks="tasks.taskit"></task-creator>
+  <task-creator class="task-creator" tasks="tasks.taskit"></task-creator>
 </div>
